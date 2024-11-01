@@ -1,5 +1,7 @@
 package concurrency
 
+import "time"
+
 type WebsiteChecker func(string) bool
 
 type result struct {
@@ -23,4 +25,9 @@ func CheckWebsites(wc WebsiteChecker, urls []string) map[string]bool {
 	}
 
 	return results
+}
+
+func slowStubWebsiteChecker(_ string) bool {
+	time.Sleep(20 * time.Millisecond)
+	return true
 }
